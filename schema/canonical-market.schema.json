@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openvenue.dev/schema/canonical-market.schema.json",
+  "title": "CanonicalMarket",
+  "description": "The standard's registry entry for one instrument and market. See spec/openvenue.md section 4.1.",
+  "type": "object",
+  "required": ["canonicalId", "sport", "league", "season", "homeTeam", "awayTeam", "scheduledStart", "marketType"],
+  "properties": {
+    "canonicalId": { "type": "string", "minLength": 1 },
+    "sport": { "enum": ["football", "basketball", "baseball", "hockey", "soccer"] },
+    "league": { "enum": ["nfl", "nba", "mlb", "nhl", "mls"] },
+    "season": { "type": "string" },
+    "homeTeam": { "type": "string" },
+    "awayTeam": { "type": "string" },
+    "scheduledStart": { "type": "string", "format": "date-time" },
+    "marketType": { "enum": ["market:moneyline", "market:spread", "market:total", "market:binary"] },
+    "param": { "type": "number" },
+    "resolutionVariance": { "type": "string" }
+  },
+  "additionalProperties": false
+}

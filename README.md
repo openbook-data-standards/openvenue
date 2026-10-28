@@ -1,6 +1,6 @@
 # OpenVenue — an open standard for vendor-agnostic routing of tokenized markets
 
-**Status:** `v0.0.1-draft` · working draft, not yet published · started 2026-10-27
+**Status:** `v0.0.2-draft` · working draft, not yet published · started 2026-10-27
 **Name:** OpenVenue · **What it is:** an open standard for describing markets,
 books, and quotes across heterogeneous tokenized venues · **The document:**
 [spec/openvenue.md](spec/openvenue.md)
@@ -32,23 +32,32 @@ vendor-specific payload.
 
 ```
 openvenue/  (this repository)
-  README.md            ← you are here
+  README.md                          ← you are here
   spec/
-    openvenue.md       ← the normative reference specification
-  schema/              ← JSON Schemas derived from the spec's data model
+    openvenue.md                     ← the normative reference specification
+  schema/                            ← JSON Schemas for every section 4 model
+    canonical-market.schema.json
     orderbook.schema.json
     fee-profile.schema.json
     quote-request.schema.json
-  examples/            ← worked canonical documents
+    venue-quote.schema.json
+    quote-decision.schema.json
+    market-equivalence.schema.json
+    equivalence-match-report.schema.json
+  examples/                          ← worked canonical documents
+    canonical-market.json
     orderbook.venue-a.json
     orderbook.venue-b.json
     quote-request.json
-  CONTRIBUTING.md      ← how to report gaps and file proposals
-  CHANGELOG.md         ← version history
-  LICENSE              ← CC BY 4.0
+    quote-decision.json
+  CONTRIBUTING.md                    ← how to report gaps and file proposals
+  CHANGELOG.md                       ← version history
+  LICENSE                            ← CC BY 4.0
 ```
 
-If a schema or example disagrees with `spec/openvenue.md`, the spec is right.
+Every model in the spec is extracted from a running routing implementation;
+the data model is descriptive, not aspirational. If a schema or example
+disagrees with `spec/openvenue.md`, the spec is right.
 
 ## Relationship to OpenBook
 

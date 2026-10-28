@@ -1,9 +1,12 @@
 {
   "venue": "venue-a",
-  "market": "openvenue:rwa:solana:tbill-usd-2026:spot",
-  "levels": [
-    { "price": 1.0004, "size": 24000 },
-    { "price": 1.0006, "size": 17500 }
+  "bids": [
+    { "price": 0.54, "size": 1200 },
+    { "price": 0.53, "size": 3400 }
+  ],
+  "asks": [
+    { "price": 0.55, "size": 2400 },
+    { "price": 0.56, "size": 1750 }
   ],
   "timestamp_ms": 1761600000000
 }

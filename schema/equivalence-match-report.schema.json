@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openvenue.dev/schema/equivalence-match-report.schema.json",
+  "title": "EquivalenceMatchReport",
+  "description": "Per-run coverage report from the equivalence layer. See spec/openvenue.md section 4.9.",
+  "type": "object",
+  "required": ["matchedCount", "totalCanonicalMarkets"],
+  "properties": {
+    "matchedCount": { "type": "integer", "minimum": 0 },
+    "totalCanonicalMarkets": { "type": "integer", "minimum": 0 },
+    "canonicalMarkets": {
+      "type": "array",
+      "items": { "$ref": "canonical-market.schema.json" },
+      "default": []
+    },
+    "venueOnlyCounts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 },
+      "default": {}
+    },
+    "unmatched": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "type": "string" } },
+      "default": {}
+    }
+  },
+  "additionalProperties": false
+}

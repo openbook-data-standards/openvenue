@@ -2,20 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://openvenue.dev/schema/quote-request.schema.json",
   "title": "QuoteRequest",
-  "description": "Stateless quote input: the caller supplies every book and fee profile with each request. See spec/openvenue.md section 4.4.",
+  "description": "Stateless quote input: the caller supplies every book and fee profile with each request. See spec/openvenue.md section 4.5.",
   "type": "object",
-  "required": ["market", "side", "budgetUsd", "builderFeeBps", "books", "fees"],
+  "required": ["canonicalMarketId", "side", "budgetUsd"],
   "properties": {
-    "market": {
-      "type": "string",
-      "pattern": "^openvenue:[a-z0-9-]+:[a-z0-9-]+:[a-z0-9-]+:[a-z0-9-]+(:[a-z0-9-]+)?$",
-      "description": "Canonical id."
-    },
-    "side": {
-      "type": "string",
-      "minLength": 1,
-      "description": "A value from the market's side vocabulary."
-    },
+    "canonicalMarketId": { "type": "string", "minLength": 1 },
+    "side": { "enum": ["home", "away", "draw", "over", "under", "yes", "no"] },
     "budgetUsd": {
       "type": "number",
       "exclusiveMinimum": 0,
@@ -24,17 +16,19 @@
     "builderFeeBps": {
       "type": "number",
       "minimum": 0,
-      "maximum": 10000
+      "maximum": 10000,
+      "default": 0
     },
     "books": {
       "type": "array",
-      "description": "One OrderBook per venue, supplied with the request.",
-      "items": { "$ref": "orderbook.schema.json" }
+      "items": { "$ref": "orderbook.schema.json" },
+      "default": []
     },
-    "fees": {
-      "type": "array",
-      "description": "One FeeProfile per venue, supplied with the request.",
-      "items": { "$ref": "fee-profile.schema.json" }
+    "feeProfiles": {
+      "type": "object",
+      "description": "Map of opaque venue key to FeeProfile.",
+      "additionalProperties": { "$ref": "fee-profile.schema.json" },
+      "default": {}
     }
   },
   "additionalProperties": false

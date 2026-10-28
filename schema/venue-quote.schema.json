@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openvenue.dev/schema/venue-quote.schema.json",
+  "title": "VenueQuote",
+  "description": "Per-venue result of walking that venue's book for a budget. See spec/openvenue.md section 4.6.",
+  "type": "object",
+  "required": ["venue", "effective_price", "contracts_yielded", "total_spent_usd", "venue_fee_usd", "builder_fee_usd", "all_in_price", "depth_exhausted"],
+  "properties": {
+    "venue": { "type": "string", "minLength": 1 },
+    "effective_price": { "type": "number" },
+    "contracts_yielded": { "type": "number" },
+    "total_spent_usd": { "type": "number" },
+    "venue_fee_usd": { "type": "number" },
+    "builder_fee_usd": { "type": "number" },
+    "all_in_price": { "type": "number" },
+    "depth_exhausted": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

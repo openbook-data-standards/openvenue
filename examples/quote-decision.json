@@ -1,0 +1,32 @@
+{
+  "canonical_market_id": "openvenue:football:nfl:2026:buf-at-kc-2026-11-02:market:total:+47.5",
+  "side": "over",
+  "requested_budget_usd": 2500,
+  "best_route": "venue-b",
+  "all_in_price": 0.5491,
+  "total_contracts_yielded": 4547.62,
+  "venue_quotes": {
+    "venue-a": {
+      "venue": "venue-a",
+      "effective_price": 0.5519,
+      "contracts_yielded": 4525.74,
+      "total_spent_usd": 2498.15,
+      "venue_fee_usd": 2.5,
+      "builder_fee_usd": 2.5,
+      "all_in_price": 0.553,
+      "depth_exhausted": false
+    },
+    "venue-b": {
+      "venue": "venue-b",
+      "effective_price": 0.5502,
+      "contracts_yielded": 4547.62,
+      "total_spent_usd": 2500.0,
+      "venue_fee_usd": 1.25,
+      "builder_fee_usd": 2.5,
+      "all_in_price": 0.5491,
+      "depth_exhausted": false
+    }
+  },
+  "split_plan": null,
+  "expires_at": "2026-10-28T04:00:15Z"
+}
