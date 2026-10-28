@@ -1,0 +1,30 @@
+{
+  "market": "openvenue:rwa:solana:tbill-usd-2026:spot",
+  "side": "buy",
+  "budgetUsd": 25000,
+  "builderFeeBps": 10,
+  "books": [
+    {
+      "venue": "venue-a",
+      "market": "openvenue:rwa:solana:tbill-usd-2026:spot",
+      "levels": [
+        { "price": 1.0004, "size": 24000 },
+        { "price": 1.0006, "size": 17500 }
+      ],
+      "timestamp_ms": 1761600000000
+    },
+    {
+      "venue": "venue-b",
+      "market": "openvenue:rwa:solana:tbill-usd-2026:spot",
+      "levels": [
+        { "price": 1.0002, "size": 8000 },
+        { "price": 1.0007, "size": 30000 }
+      ],
+      "timestamp_ms": 1761600000000
+    }
+  ],
+  "fees": [
+    { "venue": "venue-a", "taker_fee_pct": 0.001, "network_fee_usd": 0.4 },
+    { "venue": "venue-b", "taker_fee_pct": 0.0005, "network_fee_usd": 0.35 }
+  ]
+}

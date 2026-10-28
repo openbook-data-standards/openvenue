@@ -35,8 +35,20 @@ openvenue/  (this repository)
   README.md            ← you are here
   spec/
     openvenue.md       ← the normative reference specification
+  schema/              ← JSON Schemas derived from the spec's data model
+    orderbook.schema.json
+    fee-profile.schema.json
+    quote-request.schema.json
+  examples/            ← worked canonical documents
+    orderbook.venue-a.json
+    orderbook.venue-b.json
+    quote-request.json
+  CONTRIBUTING.md      ← how to report gaps and file proposals
+  CHANGELOG.md         ← version history
   LICENSE              ← CC BY 4.0
 ```
+
+If a schema or example disagrees with `spec/openvenue.md`, the spec is right.
 
 ## Relationship to OpenBook
 

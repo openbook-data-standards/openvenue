@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openvenue.dev/schema/fee-profile.schema.json",
+  "title": "FeeProfile",
+  "description": "A venue's fee schedule: taker fee fraction and network fee in USD. See spec/openvenue.md section 4.3.",
+  "type": "object",
+  "required": ["venue", "taker_fee_pct", "network_fee_usd"],
+  "properties": {
+    "venue": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque venue key."
+    },
+    "taker_fee_pct": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Taker fee as a fraction."
+    },
+    "network_fee_usd": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}

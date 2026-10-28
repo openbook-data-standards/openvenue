@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openvenue.dev/schema/orderbook.schema.json",
+  "title": "OrderBook",
+  "description": "A venue's levels for one canonical market at one instant. See spec/openvenue.md section 4.2.",
+  "type": "object",
+  "required": ["venue", "market", "levels", "timestamp_ms"],
+  "properties": {
+    "venue": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque venue key. Vendor identifiers never appear outside the adapter."
+    },
+    "market": {
+      "type": "string",
+      "pattern": "^openvenue:[a-z0-9-]+:[a-z0-9-]+:[a-z0-9-]+:[a-z0-9-]+(:[a-z0-9-]+)?$",
+      "description": "Canonical id, openvenue:<class>:<series>:<event>:<market>[:<param>]"
+    },
+    "levels": {
+      "type": "array",
+      "description": "Both sides as defined by the market type.",
+      "items": {
+        "type": "object",
+        "required": ["price", "size"],
+        "properties": {
+          "price": { "type": "number", "exclusiveMinimum": 0 },
+          "size": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "timestamp_ms": {
+      "type": "integer",
+      "description": "Epoch milliseconds, no more than 60 s in the future."
+    }
+  },
+  "additionalProperties": false
+}

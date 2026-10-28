@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openvenue.dev/schema/quote-request.schema.json",
+  "title": "QuoteRequest",
+  "description": "Stateless quote input: the caller supplies every book and fee profile with each request. See spec/openvenue.md section 4.4.",
+  "type": "object",
+  "required": ["market", "side", "budgetUsd", "builderFeeBps", "books", "fees"],
+  "properties": {
+    "market": {
+      "type": "string",
+      "pattern": "^openvenue:[a-z0-9-]+:[a-z0-9-]+:[a-z0-9-]+:[a-z0-9-]+(:[a-z0-9-]+)?$",
+      "description": "Canonical id."
+    },
+    "side": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A value from the market's side vocabulary."
+    },
+    "budgetUsd": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 50000
+    },
+    "builderFeeBps": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "books": {
+      "type": "array",
+      "description": "One OrderBook per venue, supplied with the request.",
+      "items": { "$ref": "orderbook.schema.json" }
+    },
+    "fees": {
+      "type": "array",
+      "description": "One FeeProfile per venue, supplied with the request.",
+      "items": { "$ref": "fee-profile.schema.json" }
+    }
+  },
+  "additionalProperties": false
+}
