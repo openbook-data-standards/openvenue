@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+Contract depth folded in from Proposal 0001 (all eight items decided):
+
+- Normative precedence stated in the spec: prose wins over schemas/examples.
+- Book ordering required (bids desc, asks asc, best first); consumers must
+  re-sort regardless.
+- Crossed/locked books are legal documents; a core refuses the quote rather
+  than assuming both sides fill.
+- Equivalence is all-or-nothing; line differences are different canonical
+  markets, settlement differences carry `resolutionVariance`.
+- Canonical id normalization fixed: lowercase, explicit `param` sign,
+  bytewise equality.
+- `split_plan` units defined (USD per venue, sums to the requested budget).
+- `side` bounded by market shape; inexpressible outcomes are reported
+  unmatched, never approximated.
+- Staleness declared caller-side; adapters preserve venue timestamps.
+
 ## v0.0.2-draft — 2026-10-28
 
 Data model aligned to the running implementation it was extracted from.
