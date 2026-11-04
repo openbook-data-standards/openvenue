@@ -1,0 +1,24 @@
+{
+  "matchedCount": 1,
+  "totalCanonicalMarkets": 1,
+  "canonicalMarkets": [
+    {
+      "canonicalId": "openvenue:football:nfl:2026:buf-at-kc-2026-11-02:market:total:+47.5",
+      "sport": "football",
+      "league": "nfl",
+      "season": "2026",
+      "homeTeam": "kc",
+      "awayTeam": "buf",
+      "scheduledStart": "2026-11-02T01:15:00Z",
+      "marketType": "market:total",
+      "param": 47.5
+    }
+  ],
+  "venueOnlyCounts": {
+    "venue-a": 1,
+    "venue-b": 1
+  },
+  "unmatched": {
+    "venue-b": ["BUFKC-20261102-PROP-PASSYDS"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "venue": "venue-b",
+  "effective_price": 0.5485,
+  "contracts_yielded": 4547.62,
+  "total_spent_usd": 2493.61,
+  "venue_fee_usd": 2.49,
+  "builder_fee_usd": 2.49,
+  "all_in_price": 0.5491,
+  "depth_exhausted": false
+}
