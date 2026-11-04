@@ -1,6 +1,6 @@
 # Proposal 0001 — Contract depth: precedence, ordering, and equivalence edge cases
 
-**Status:** proposed — awaiting editor decision on each item.
+**Status:** decided (all eight items, editor approval 2026-11-04) — folded into `spec/openvenue.md`.
 **Amends:** `spec/openvenue.md` sections 2, 3, 4.2–4.7, and adds a new
 precedence/conformance section.
 **Affects:** venue-adapter implementers and routing-core consumers.

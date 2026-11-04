@@ -7,6 +7,8 @@
   systems.
 - **Provenance:** this draft is extracted from a running implementation. Every
   model below is in production use; nothing in the data model is aspirational.
+- **Precedence:** where this document and a derived artifact (schema, example)
+  disagree, **this document wins**; fix the artifact.
 
 OpenVenue defines the documents a venue adapter emits and a routing core
 consumes. Everything a vendor knows about its own instruments — identifiers,
@@ -44,6 +46,11 @@ openvenue:<sport>:<league>:<season>:<fixture>:<market_type>[:<param>]
   `market:total`, or `market:binary`.
 - `param` — optional qualifier, for example the line on a spread or total.
 
+Canonical ids are **lowercase**. A `param` on a signed market type carries an
+explicit sign (`+47.5`, `-0.5`). The fixture date segment is `YYYY-MM-DD` in
+the fixture's canonical timezone as declared on the adapter's mapping record.
+Two canonical ids are equal only **bytewise** — never case-insensitively.
+
 Example:
 
 ```
@@ -74,6 +81,11 @@ market. Two listings are the same market only when they agree on:
    scope.
 3. **Resolution rule.** If settlement differs (for example void-on-tie versus
    split), the market carries `resolutionVariance` and is not silently joined.
+
+Matching is **all-or-nothing**. A difference in `param` (the line) is a
+different canonical market, not a variance — it belongs in the id. A
+settlement-rule difference carries `resolutionVariance` and prevents the
+join. Every other non-match is reported, never fuzzy-joined.
 
 Unmatched venue listings are reported per venue (`EquivalenceMatchReport`) so
 a consumer can measure coverage rather than guess.
@@ -114,6 +126,19 @@ input is rejected, never clamped.
 | `asks` | OrderBookLevel[] | may be empty |
 | `timestamp_ms` | integer | epoch milliseconds; rejected if more than 60 s in the future |
 
+Venues emit `bids` sorted by `price` descending and `asks` sorted ascending —
+best level first. A consumer MUST NOT infer correctness from array order: it
+re-sorts or walks by best price. Emitting unsorted is a conformance failure.
+
+A crossed or locked book (best bid ≥ best ask) is a legal document: the
+adapter reports what the venue reported and does not un-cross or drop levels.
+A routing core treats it as a data anomaly, MAY refuse that venue's quote,
+and MUST NOT execute on the assumption both sides fill.
+
+Staleness is the caller's concern, not the schema's: the QuoteRequest is
+stateless and consumes the books it is given. Adapters preserve the venue's
+own timestamp rather than stamping receipt time.
+
 ### 4.4 FeeProfile
 
 | Field | Type | Bounds |
@@ -134,6 +159,12 @@ input is rejected, never clamped.
 
 The request is stateless: the caller supplies every book and fee profile with
 each request. Nothing about a venue lives in the core.
+
+`side` is bounded by the market's shape: `draw` is valid only where the
+market admits a draw outcome; `yes`/`no` belong to binary and event-contract
+markets; `home`/`away`/`over`/`under` belong to the corresponding sport
+market types. A venue outcome that cannot be expressed is reported unmatched
+by the adapter, never approximated.
 
 ### 4.6 VenueQuote
 
@@ -159,7 +190,7 @@ each request. Nothing about a venue lives in the core.
 | `all_in_price` | decimal | blended all-in price |
 | `total_contracts_yielded` | decimal | contracts across the plan |
 | `venue_quotes` | map<venue, VenueQuote> | per-venue breakdown |
-| `split_plan` | map<venue, decimal>, optional | allocation when splitting beats best single venue |
+| `split_plan` | map<venue, decimal>, optional | USD allocated to each venue when splitting beats best single venue; sums to `requested_budget_usd`, absent key means zero |
 | `expires_at` | datetime | quote validity deadline |
 
 ### 4.8 AllInQuote
