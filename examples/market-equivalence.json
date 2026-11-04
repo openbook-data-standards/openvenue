@@ -1,0 +1,10 @@
+{
+  "canonical_id": "openvenue:football:nfl:2026:buf-at-kc-2026-11-02:market:total:+47.5",
+  "sport": "football",
+  "league": "nfl",
+  "start_time": "2026-11-02T01:15:00Z",
+  "venue_market_ids": {
+    "venue-a": "0x9f2c…total475",
+    "venue-b": "BUFKC-20261102-TOT-47.5"
+  }
+}
